@@ -85,6 +85,10 @@ export class AuthService {
     this.logger.log(`Successfully updated user with ID: ${id}`);
     return { id: updatedUser.id, email: updatedUser.email, name: updatedUser.name };
   }
+  
+  async findAllUsers() {
+    return this.prisma.user.findMany();
+  }
 
   async deleteUser(id: string) {
     this.logger.log(`Attempting to delete user with ID: ${id}`);

@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Mutation, Args, Query } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
 import { User, AuthResponse } from './auth.types';
 import { RegisterDto, LoginDto } from './dto/auth.dto';
@@ -15,5 +15,9 @@ export class AuthResolver {
   @Mutation(() => AuthResponse)
   async login(@Args('input') input: LoginDto) {
     return this.authService.login(input);
+  }
+  @Query(() => [User])
+  async users() {
+    return this.authService.findAllUsers();
   }
 }
